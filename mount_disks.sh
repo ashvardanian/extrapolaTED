@@ -2,8 +2,9 @@
 
 # Define the SSD devices
 declare -a ssds=(
-  "nvme1n1"
-  "nvme9n1"
+  "nvme2n1"
+  "nvme3n1"
+  "nvme4n1"
 )
 
 # Loop through each SSD
@@ -33,3 +34,8 @@ do
   echo "/dev/${ssd}p1 /mnt/$ssd ext4 defaults 0 0" | sudo tee -a /etc/fstab
 
 done
+
+
+ln -s /mnt/nvme2n1 data
+ln -s /mnt/nvme3n1 data_parquet
+ln -s /mnt/nvme4n1 data_usearch

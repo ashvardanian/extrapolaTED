@@ -12,10 +12,10 @@ It uses:
 
 ### Data
 
-- [TED dataset](https://www.idiap.ch/en/dataset/ted) to understand which topics are already covered, and in what style.
-- [WIT - Wikipedia images dataset](https://github.com/google-research-datasets/wit) for image RAG.
-- [Arxiv abstracts - `unum-cloud/ann-arxiv-2m`](https://huggingface.co/datasets/unum-cloud/ann-arxiv-2m) from HuggingFace.
-- [Wikipedia abstracts - `wikipedia`](https://huggingface.co/datasets/wikipedia/) from HuggingFace.
+- [TED dataset](https://www.idiap.ch/en/dataset/ted) to understand which topics are already covered: __1 K transcripts__.
+- [WIT - Wikipedia images dataset](https://github.com/google-research-datasets/wit) for image RAG: __500 K images__.
+- [Arxiv abstracts - `unum-cloud/ann-arxiv-2m`](https://huggingface.co/datasets/unum-cloud/ann-arxiv-2m): __2 M vectorized abstracts__.
+- [Wikipedia abstracts - `wikipedia`](https://huggingface.co/datasets/wikipedia/): __6 M abstracts__.
 
 ### Technology
 
