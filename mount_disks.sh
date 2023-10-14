@@ -39,3 +39,7 @@ done
 ln -s /mnt/nvme2n1 data
 ln -s /mnt/nvme3n1 data_parquet
 ln -s /mnt/nvme4n1 data_usearch
+
+sudo chown -R user1:user1 /mnt/nvme2n1
+sudo chown -R user1:user1 /mnt/nvme3n1
+sudo chown -R user1:user1 /mnt/nvme4n1
