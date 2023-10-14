@@ -25,7 +25,7 @@ urls=(
 )
 
 # Directory to save the downloaded files
-save_dir="/mnt/nvme2n1/wit"
+save_dir="./data/wit"
 
 # Create the directory if it doesn't exist
 mkdir -p "$save_dir"

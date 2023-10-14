@@ -8,8 +8,8 @@ import random
 from PIL import Image
 import pyarrow.csv as pc
 
-DOWNLOAD_FOLDER = "/mnt/nvme2n1/wit-images/"
-TSV_FOLDER = "/mnt/nvme2n1/wit/"
+DOWNLOAD_FOLDER = "./data/wit-images/"
+TSV_FOLDER = "./data/wit/"
 
 # Create the download folder if it doesn't exist
 if not os.path.exists(DOWNLOAD_FOLDER):
@@ -116,6 +116,7 @@ def is_valid_image(filepath):
 
 def main():
     tsv_files = [file for file in os.listdir(TSV_FOLDER) if file.endswith(".tsv")]
+    random.shuffle(tsv_files)
 
     for tsv_file in tsv_files:
         options = pc.ParseOptions(
@@ -127,7 +128,7 @@ def main():
         df = table.to_pandas()
         image_urls = df["image_url"].unique()
 
-        with ThreadPoolExecutor(max_workers=2000) as executor:
+        with ThreadPoolExecutor(max_workers=100) as executor:
             for idx, image_url in enumerate(image_urls):
                 executor.submit(
                     download_and_resize_image, image_url, idx, len(image_urls)

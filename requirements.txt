@@ -6,3 +6,5 @@ simsimd
 stringzilla
 usearch
 uform
+
+datasets # HuggingFace datasets to fetch Wikipedia and and pre-computed Arxiv
