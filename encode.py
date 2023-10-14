@@ -1,11 +1,13 @@
+import torch
 import numpy as np
 from uform import get_model
 from torch import Tensor
 from transformers import AutoTokenizer, AutoModel
 
+model_uform = get_model("unum-cloud/uform-vl-english")
 tokenizer_e5 = AutoTokenizer.from_pretrained("intfloat/e5-base-v2")
 model_e5 = AutoModel.from_pretrained("intfloat/e5-base-v2")
-model_uform = get_model("unum-cloud/uform-vl-english")
+scripted_model_e5 = model_e5
 
 
 def average_pool(last_hidden_states: Tensor, attention_mask: Tensor) -> Tensor:
@@ -21,7 +23,7 @@ def vectorize_e5(input_texts: list) -> np.ndarray:
         truncation=True,
         return_tensors="pt",
     )
-    outputs = model_e5(**batch_dict)
+    outputs = scripted_model_e5(**batch_dict)
     embeddings = average_pool(outputs.last_hidden_state, batch_dict["attention_mask"])
     return embeddings.detach().numpy().astype(np.float16)
 
