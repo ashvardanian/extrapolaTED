@@ -1,0 +1,8 @@
+pyarrow
+requests
+pandas
+Pillow
+simsimd
+stringzilla
+usearch
+uform
