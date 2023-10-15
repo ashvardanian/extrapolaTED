@@ -18,7 +18,7 @@ extrapolaTED is a pioneering application designed to craft TED-like lectures on 
 
 ### Data
 
-Dive deep into the heart of ExtrapolaTED with a wide array of datasets that serve as the bedrock of our content generation:
+Dive deep into the heart of extrapolaTED with a wide array of datasets that serve as the bedrock of our content generation:
 
 - **TED Dataset**: With over __1,000 transcripts__, this dataset provides a profound understanding of the topics already covered in TED talks, aiding in the exploration of new territories.
 - **Arxiv Abstracts (`unum-cloud/ann-arxiv-2m`)**: A treasure trove of __2 million vectorized abstracts__ summarizing the latest strides in scientific research.
@@ -29,22 +29,22 @@ Dive deep into the heart of ExtrapolaTED with a wide array of datasets that serv
 
 Embark on a technological odyssey encompassing retrieval, embedding, story and image generation:
 
-- **USearch**: Spearheaded by Ash Vardanian, USearch is our go-to technology for efficient and precise retrieval of relevant data from our expansive datasets.
-- **UForm**: Also a brainchild of Ash Vardanian, UForm takes charge of image embeddings, making visual content more accessible and meaningful.
-- **Wordware**: Orchestrated by Robert Chandler, Wordware facilitates multi-step API calls, streamlining the integration of different technologies into a cohesive workflow.
+- **[USearch](https://github.com/unum-cloud/usearch)** is our go-to technology for efficient and precise retrieval of relevant data from our expansive datasets.
+- **[UForm](https://github.com/unum-cloud/uform)** takes charge of image embeddings, making visual content more accessible and meaningful.
+- **[Wordware](https://wordware.ai)** facilitates multi-step API calls, streamlining the integration of different technologies into a cohesive workflow.
 - **ChatGPT**: A cornerstone in our story generation pipeline, ChatGPT transforms raw data into engaging narratives, bringing topics to life.
 - **Dall-E 3**: When it comes to image generation, Dall-E 3 steps in to create captivating visuals that resonate with the generated content.
 - **ElevenLabs API**: Leveraged for voice synthesis, ElevenLabs breathes life into our content, making the learning experience more immersive.
 
 ## :hammer_and_wrench: Setup
 
-Get started with ExtrapolaTED in a breeze:
+Get started with extrapolaTED in a breeze:
 
 1. **Environment Setup**:
    - Using Anaconda:
      ```sh
      conda env create -f conda.yml
-     conda activate ExtrapolaTED
+     conda activate extrapolaTED
      ```
    - Or manually with PIP:
      ```sh
@@ -65,22 +65,22 @@ Get started with ExtrapolaTED in a breeze:
      ```
 
 3. **Server Startup**:
-   - Launch the server to start exploring with ExtrapolaTED:
+   - Launch the server to power retrieval augmentation:
      ```sh
      python server.py
      ```
 
 4. **Exploration**:
-   - Open your Jupyter Notebook and follow the instructions to start generating TED-like lectures on your desired topics.
+   - Open your Jupyter Notebook and start generating TED-like lectures on your desired topics.
    - Or simply open the [Wordware Prompt Pipeline](https://app.wordware.ai/r/25184ff7-db28-4c50-a0c4-2addbf31c28f) and start playing with it!
 
 Your journey towards creating insightful and illuminating TED-like lectures begins now!
 
 ## :star2: The Minds Behind
 
-- **Ash Vardanian**: The architect behind USearch, UForm, and the retrieval pipelines.
-- **Tyler Neylon**: The maestro of prompting and video generation, orchestrating pure Python to create magic.
-- **Robert Chandler**: The visionary behind Wordware, the platform that empowers Language model apps.
+- **[Ash Vardanian](https://github.com/ashvardanian)**: The architect behind USearch, UForm, and the retrieval pipelines.
+- **[Tyler Neylon](https://github.com/tylerneylon)**: The person behind [Explacy](https://github.com/tylerneylon/explacy) and maestro of prompting and video generation.
+- **[Robert Chandler](https://github.com/nyacg)**: The visionary behind Wordware, the platform that empowers Language model apps.
 
 ## :file_folder: Project Structure
 
@@ -138,4 +138,6 @@ Navigate through the well-organized directory structure to explore the different
     └── superconductors.json
 ```
 
-> _extrapolaTED: Where the quest for knowledge never ends._
+---
+
+> **_extrapolaTED: Where the quest for knowledge never ends._**
