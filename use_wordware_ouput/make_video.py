@@ -42,10 +42,15 @@ if __name__ == '__main__':
 
     print('Ensuring images and audio are downloaded')
     cd_prefix = f'cd {data_dir.absolute()} &&'
-    for block in data:
+    image_fnames = []
+    for i, block in enumerate(data):
         # The -nc flag prevents re-downloading; for faster development.
         os.system(f'{cd_prefix} wget -nc {block["audio"]}')
         os.system(f'{cd_prefix} wget -nc {block["image"]}')
+        fname = str(Path(block['image']).name)
+        new_name = f'image_{i}.jpg'
+        os.system(f'{cd_prefix} mv {fname} {new_name}')
+        image_fnames.append(new_name)
     os.system(f'cp silence.mp3 {data_dir.absolute()}')
 
     # Discover the audio durations of each mp3 file.
@@ -78,7 +83,7 @@ if __name__ == '__main__':
     # Create the video file.
     commands = []
     for i, block in enumerate(data):
-        commands.append("file '" + Path(block['image']).name + "'")
+        commands.append(f"file '{image_fnames[i]}'")
         duration = times[i] + 1
         if i == 0 or i == len(data) - 1:
             duration += 0.5
