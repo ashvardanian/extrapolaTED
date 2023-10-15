@@ -8,8 +8,8 @@ It uses:
 - Wikipedia as a ground-truth retrieval source for textual and visual content.
 - Arxiv paper abstracts as summaries of the most recent scientific achievements.
 - ChatGPT and Dall-E 3 for new produced content.
-- ElevenLabs API to produce voice.
-- WordWare for multi-step API calls.
+- [ElevenLabs](https://elevenlabs.io) API to produce voice.
+- [Wordware](https://wordware.ai) for multi-step API calls.
 
 ## Methodology
 
@@ -42,3 +42,6 @@ micromamba update -f conda.yml
 
 - `data/ann-arxiv-2m/`
 - `data/ann-wiki-images/`
+
+### Prompts
+The entire prompt pipeline is hosted on Wordware. You can clone and re-use it [here](https://app.wordware.ai/copy/25184ff7-db28-4c50-a0c4-2addbf31c28f)
