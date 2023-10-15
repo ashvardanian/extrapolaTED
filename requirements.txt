@@ -1,13 +1,16 @@
-pyarrow
+numpy
 requests
 pandas
 Pillow
 simsimd
 stringzilla
 usearch
-uform
 
-pyarrow
 datasets # HuggingFace datasets to fetch Wikipedia and and pre-computed Arxiv
 mwparserfromhell # To parse Wikipedia articles
 apache_beam # For parsing runners
+
+# Complex dependencies:
+pyarrow
+uform
+transformers

@@ -1,7 +1,6 @@
 
 urls=(
     "https://huggingface.co/datasets/unum-cloud/ann-arxiv-2m/resolve/main/abstract.e5-base-v2.fbin"
-    "https://huggingface.co/datasets/unum-cloud/ann-arxiv-2m/resolve/main/title.e5-base-v2.fbin"
     "https://huggingface.co/datasets/unum-cloud/ann-arxiv-2m/resolve/main/title_abstract.tsv"
 )
 
