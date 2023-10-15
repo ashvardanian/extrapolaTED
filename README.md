@@ -2,16 +2,14 @@
 
 > __Bringing TED experiences to every subject with Gen AI__
 
-Have you ever
-
 ExtrapolaTED is a tiny app, the produces a TED-like lectures on any given topic.
 It uses:
 
 - Wikipedia as a ground-truth retrieval source for textual and visual content.
 - Arxiv paper abstracts as summaries of the most recent scientific achievements.
 - ChatGPT and Dall-E 3 for new produced content.
-- ElevenLabs API to produce voice.
-- WordWare for multi-step API calls.
+- [ElevenLabs](https://elevenlabs.io) API to produce voice.
+- [Wordware](https://wordware.ai) for multi-step API calls.
 
 ## Methodology
 
@@ -43,3 +41,8 @@ conda create -n extrapolated python=3.10
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 pip3 install -r requirements.txt
 ```
+
+### Prompts
+
+The entire prompt pipeline is hosted on Wordware.
+You can clone and re-use it [here](https://app.wordware.ai/copy/25184ff7-db28-4c50-a0c4-2addbf31c28f).
