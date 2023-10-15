@@ -52,6 +52,7 @@ if __name__ == '__main__':
         os.system(f'{cd_prefix} mv {fname} {new_name}')
         image_fnames.append(new_name)
     os.system(f'cp silence.mp3 {data_dir.absolute()}')
+    os.system(f'cp add_ken_burns.sh {data_dir.absolute()}')
 
     # Discover the audio durations of each mp3 file.
     print('Checking time durations of each audio clip')
@@ -79,6 +80,15 @@ if __name__ == '__main__':
         f.write('\n'.join(fnames) + '\n')
     cmd = 'ffmpeg -f concat -safe 0 -i audio.txt -c copy full_audio.mp3'
     os.system(f'{cd_prefix} {cmd}')
+
+    # Add a Ken Burns effect to each slide.
+    for i, block in enumerate(data):
+        duration = times[i] + 1
+        if i == 0 or i == len(data) - 1:
+            duration += 0.5
+        num_frames = int(duration * 25)
+        zoom_inc = (1.5 - 1.0) / num_frames
+        os.system(f'{cd_prefix} ./add_ken_burns.sh {image_fnames[i]} {zoom_inc} {num_frames} kb_{i}.mp4')
 
     # Create the video file.
     commands = []
