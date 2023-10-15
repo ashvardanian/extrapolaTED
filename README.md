@@ -9,7 +9,7 @@ __extrapolaTED__ is a pioneering application designed to craft TED-like lectures
 ## :rocket: Features
 
 - **Boundless Exploration**: Venture into any subject with TED-like insights powered by Generative AI.
-- **Holistic Understanding**: Utilize a rich tapestry of resources, including Wikipedia, Arxiv abstracts, and more, for a well-rounded grasp of topics.
+- **Holistic Understanding**: Utilize a rich tapestry of multi-modal resources, including Arxiv papers and Wiki.
 - **Creative Generation**: Witness the blend of ChatGPT and Dall-E 3 in producing captivating content and visuals.
 - **Voice Synthesis**: Experience smooth, natural narrations courtesy of [ElevenLabs](https://elevenlabs.io) API.
 - **Multi-step API Calls**: Harness the power of [Wordware](https://wordware.ai) for efficient API orchestration.
