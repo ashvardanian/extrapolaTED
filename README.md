@@ -10,7 +10,7 @@ __extrapolaTED__ is a pioneering application designed to craft TED-like lectures
 
 - **Boundless Exploration**: Venture into any subject with TED-like insights powered by Generative AI.
 - **Holistic Understanding**: Utilize a rich tapestry of multi-modal resources, including Arxiv papers and Wiki.
-- **Creative Generation**: Witness the blend of ChatGPT and Dall-E 3 in producing captivating content and visuals.
+- **Creative Generation**: Witness the blend of ChatGPT and Stable Diffusion in producing captivating stories.
 - **Voice Synthesis**: Experience smooth, natural narrations courtesy of [ElevenLabs](https://elevenlabs.io) API.
 - **Multi-step API Calls**: Harness the power of [Wordware](https://wordware.ai) for efficient API orchestration.
 
@@ -24,7 +24,7 @@ Embark on a technological odyssey encompassing retrieval, embedding, story, and 
 - **[UForm](https://github.com/unum-cloud/uform)** takes charge of image embeddings, making visual content more accessible and meaningful.
 - **[Wordware](https://wordware.ai)** facilitates multi-step API calls, streamlining the integration of different technologies into a cohesive workflow.
 - **ChatGPT** transforms raw data into engaging narratives, bringing topics to life.
-- **Dall-E 3** creates captivating visuals that resonate with the generated content.
+- **Stable Diffusion** creates captivating visuals that resonate with the generated content.
 - **ElevenLabs API** gives a recognizable voice to our content, making the learning experience more immersive.
 
 ### Data
