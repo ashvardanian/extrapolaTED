@@ -15,7 +15,6 @@ model_e5 = AutoModel.from_pretrained("intfloat/e5-base-v2").to(device)
 if torch.cuda.device_count() > 1:
     print(f"Using {torch.cuda.device_count()} GPUs!")
     model_e5 = torch.nn.DataParallel(model_e5)
-    model_uform = torch.nn.DataParallel(model_uform)
 
 scripted_model_e5 = model_e5
 
@@ -36,17 +35,38 @@ def vectorize_e5(input_texts: list) -> np.ndarray:
     # Move data to the appropriate device
     batch_dict = {k: v.to(device) for k, v in batch_dict.items()}
 
-    outputs = scripted_model_e5(**batch_dict)
-    embeddings = average_pool(outputs.last_hidden_state, batch_dict["attention_mask"])
-    return embeddings.detach().cpu().numpy().astype(np.float16)
+    def infer():
+        outputs = scripted_model_e5(**batch_dict)
+        embeddings = average_pool(outputs.last_hidden_state, batch_dict["attention_mask"])
+        return embeddings.detach().cpu().numpy().astype(np.float16)
+
+
+    if torch.cuda.device_count() > 1:
+        with torch.cuda.amp.autocast():
+            return infer()
+    else:
+        return infer()
 
 
 def vectorize_uform(input_texts_or_images: list) -> np.ndarray:
+
     if isinstance(input_texts_or_images[0], str):
-        data = [model_uform.preprocess_text(t) for t in input_texts_or_images]
-        embeddings = model_uform.encode_text(data)
+        batch_dict = model_uform.preprocess_text(input_texts_or_images)
+        # Move data to the appropriate device
+        batch_dict = {k: v.to(device) for k, v in batch_dict.items()}
+        embeddings = model_uform.encode_text(batch_dict)
 
     else:
-        data = [model_uform.preprocess_image(i) for i in input_texts_or_images]
-        embeddings = model_uform.encode_image(data)
-    return np.array(embeddings, dtype=np.float16)
+        batch_dict = model_uform.preprocess_image(input_texts_or_images)
+        # Move data to the appropriate device
+        batch_dict = {k: v.to(device) for k, v in batch_dict.items()}
+        embeddings = model_uform.encode_image(batch_dict)
+    
+    return embeddings.detach().cpu().numpy().astype(np.float16)
+
+
+if __name__ == "__main__":
+    vectorize_e5(["test"] * 2048)
+    # while True:
+    #     vectorize_e5(["test"] * 2048)
+    vectorize_uform(["test"] * 128)
