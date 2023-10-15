@@ -2,22 +2,13 @@ name: ExtrapolaTED
 channels:
   - pytorch
   - nvidia
-  - defaults
-  - conda-forge
-  - huggingface
 dependencies:
-  - python=3.10
   - pytorch-cuda=11.8
-  - pyarrow
   - pytorch
   - torchvision
   - torchaudio
-  - requests
-  - pandas
-  - pillow
-  - numpy
-  - pip
   - pip:
+    - python=3.10
     - uform
     - usearch
     - simsimd
@@ -29,3 +20,8 @@ dependencies:
     - ipykernel
     - jupyter
     - ipywidgets
+    - pandas
+    - pillow
+    - pyarrow
+    - requests
+    - numpy

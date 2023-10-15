@@ -1,6 +1,8 @@
-# ExtrapolaTED
+# extrapolaTED
 
 > __Bringing TED experiences to every subject with Gen AI__
+
+Have you ever
 
 ExtrapolaTED is a tiny app, the produces a TED-like lectures on any given topic.
 It uses:
@@ -16,11 +18,9 @@ It uses:
 ### Data
 
 - [TED dataset](https://www.idiap.ch/en/dataset/ted) to understand which topics are already covered: __1 K transcripts__.
-- [WIT - Wikipedia images dataset](https://github.com/google-research-datasets/wit) for image RAG: __500 K images__.
 - [Arxiv abstracts - `unum-cloud/ann-arxiv-2m`](https://huggingface.co/datasets/unum-cloud/ann-arxiv-2m): __2 M vectorized abstracts__.
+- [WIT - Wikipedia images dataset](https://github.com/google-research-datasets/wit) subset for image RAG: __3 M images__.
 - [Wikipedia abstracts - `wikipedia`](https://huggingface.co/datasets/wikipedia/): __6 M abstracts__.
-
-The full WIT dataset is a 37.6 million entity rich image-text examples with 11.5 million unique images across 108 Wikipedia languages.
 
 ### Technology
 
@@ -29,16 +29,17 @@ The full WIT dataset is a 37.6 million entity rich image-text examples with 11.5
 - ChatGPT: for story generation.
 - Dall-E 3 for image generation.
 
+To build up the Anaconda environment:
+
 ```sh
 conda env create -f conda.yml
 conda activate ExtrapolaTED
-
-# Wanna configure faster?
-micromamba create -f conda.yml 
-micromamba update -f conda.yml
 ```
 
-### Directory Structure
+Or better manually, with PIP:
 
-- `data/ann-arxiv-2m/`
-- `data/ann-wiki-images/`
+```sh
+conda create -n extrapolated python=3.10
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip3 install -r requirements.txt
+```
