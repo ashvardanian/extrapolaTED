@@ -20,9 +20,9 @@ __extrapolaTED__ is a pioneering application designed to craft TED-like lectures
 
 Embark on a technological odyssey encompassing retrieval, embedding, story, and image generation:
 
-- **[USearch](https://github.com/unum-cloud/usearch)** is our go-to technology for efficiently and precisely retrieving relevant data from our expansive datasets.
-- **[UForm](https://github.com/unum-cloud/uform)** takes charge of image embeddings, making visual content more accessible and meaningful.
-- **[Wordware](https://wordware.ai)** facilitates multi-step API calls, streamlining the integration of different technologies into a cohesive workflow.
+- **[USearch](https://github.com/unum-cloud/usearch)** is our go-to technology for Semantic Vector Search.
+- **[UForm](https://github.com/unum-cloud/uform)** takes charge of Vision Language Understanding.
+- **[Wordware](https://wordware.ai)** facilitates multi-step API calls, forming a cohesive workflow.
 - **ChatGPT** transforms raw data into engaging narratives, bringing topics to life.
 - **Stable Diffusion** creates captivating visuals that resonate with the generated content.
 - **ElevenLabs API** gives a recognizable voice to our content, making the learning experience more immersive.
