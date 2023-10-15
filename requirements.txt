@@ -5,6 +5,7 @@ Pillow
 simsimd
 stringzilla
 usearch
+fastapi
 
 datasets # HuggingFace datasets to fetch Wikipedia and and pre-computed Arxiv
 mwparserfromhell # To parse Wikipedia articles

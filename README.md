@@ -6,7 +6,10 @@ ExtrapolaTED is a tiny app, the produces a TED-like lectures on any given topic.
 It uses:
 
 - Wikipedia as a ground-truth retrieval source for textual and visual content.
+- Arxiv paper abstracts as summaries of the most recent scientific achievements.
 - ChatGPT and Dall-E 3 for new produced content.
+- ElevenLabs API to produce voice.
+- WordWare for multi-step API calls.
 
 ## Methodology
 
@@ -25,7 +28,6 @@ The full WIT dataset is a 37.6 million entity rich image-text examples with 11.5
 - UForm: for image embeddings.
 - ChatGPT: for story generation.
 - Dall-E 3 for image generation.
-- StreamLit: for UI.
 
 ```sh
 conda env create -f conda.yml
