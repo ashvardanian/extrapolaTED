@@ -8,8 +8,8 @@ import random
 from PIL import Image
 import pyarrow.csv as pc
 
-DOWNLOAD_FOLDER = "./data/wit-images/"
-TSV_FOLDER = "./data/wit/"
+DOWNLOAD_FOLDER = "./data/wiki-images/"
+TSV_FOLDER = "./data/wiki-images/"
 
 # Create the download folder if it doesn't exist
 if not os.path.exists(DOWNLOAD_FOLDER):

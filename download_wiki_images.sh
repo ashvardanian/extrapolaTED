@@ -1,4 +1,5 @@
 #!/bin/bash
+# Downloads metatadata for images from the Wikipedia-based Image Text Dataset (WIT)
 
 # List of URLs to download
 urls=(
@@ -25,7 +26,7 @@ urls=(
 )
 
 # Directory to save the downloaded files
-save_dir="./data/wit"
+save_dir="./data/wiki-images"
 
 # Create the directory if it doesn't exist
 mkdir -p "$save_dir"

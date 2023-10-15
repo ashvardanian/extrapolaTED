@@ -17,6 +17,8 @@ It uses:
 - [Arxiv abstracts - `unum-cloud/ann-arxiv-2m`](https://huggingface.co/datasets/unum-cloud/ann-arxiv-2m): __2 M vectorized abstracts__.
 - [Wikipedia abstracts - `wikipedia`](https://huggingface.co/datasets/wikipedia/): __6 M abstracts__.
 
+The full WIT dataset is a 37.6 million entity rich image-text examples with 11.5 million unique images across 108 Wikipedia languages.
+
 ### Technology
 
 - USearch: for retrieval.
@@ -33,3 +35,8 @@ conda activate ExtrapolaTED
 micromamba create -f conda.yml 
 micromamba update -f conda.yml
 ```
+
+### Directory Structure
+
+- `data/ann-arxiv-2m/`
+- `data/ann-wiki-images/`
