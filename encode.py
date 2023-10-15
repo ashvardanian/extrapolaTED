@@ -4,9 +4,19 @@ from uform import get_model
 from torch import Tensor
 from transformers import AutoTokenizer, AutoModel
 
-model_uform = get_model("unum-cloud/uform-vl-english")
+# Check if CUDA is available and set the device accordingly
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+model_uform = get_model("unum-cloud/uform-vl-english").to(device)
 tokenizer_e5 = AutoTokenizer.from_pretrained("intfloat/e5-base-v2")
-model_e5 = AutoModel.from_pretrained("intfloat/e5-base-v2")
+model_e5 = AutoModel.from_pretrained("intfloat/e5-base-v2").to(device)
+
+# If multiple GPUs are available, wrap the model with DataParallel
+if torch.cuda.device_count() > 1:
+    print(f"Using {torch.cuda.device_count()} GPUs!")
+    model_e5 = torch.nn.DataParallel(model_e5)
+    model_uform = torch.nn.DataParallel(model_uform)
+
 scripted_model_e5 = model_e5
 
 
@@ -23,9 +33,12 @@ def vectorize_e5(input_texts: list) -> np.ndarray:
         truncation=True,
         return_tensors="pt",
     )
+    # Move data to the appropriate device
+    batch_dict = {k: v.to(device) for k, v in batch_dict.items()}
+
     outputs = scripted_model_e5(**batch_dict)
     embeddings = average_pool(outputs.last_hidden_state, batch_dict["attention_mask"])
-    return embeddings.detach().numpy().astype(np.float16)
+    return embeddings.detach().cpu().numpy().astype(np.float16)
 
 
 def vectorize_uform(input_texts_or_images: list) -> np.ndarray:

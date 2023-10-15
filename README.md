@@ -25,4 +25,11 @@ It uses:
 - Dall-E 3 for image generation.
 - StreamLit: for UI.
 
+```sh
+conda env create -f conda.yml
+conda activate ExtrapolaTED
 
+# Wanna configure faster?
+micromamba create -f conda.yml 
+micromamba update -f conda.yml
+```
