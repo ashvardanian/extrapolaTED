@@ -1,40 +1,40 @@
 # extrapolaTED: Unveiling the Unspoken
 
+> __Bringing TED experiences to every topic with Gen AI__.
+
 [![extrapolaTED Banner](./extrapolaTED.png)](https://app.wordware.ai/r/25184ff7-db28-4c50-a0c4-2addbf31c28f)
 
-> __Elevating knowledge sharing through Generative AI. Dive into the realms of the untouched and the unspoken, with extrapolaTED.__
-
-extrapolaTED is a pioneering application designed to craft TED-like lectures on any conceivable topic. Through a fusion of AI and human genius, we're pushing the boundaries of education and information dissemination. Our mission is to democratize knowledge, making the unknown known to all.
+__extrapolaTED__ is a pioneering application designed to craft TED-like lectures on any conceivable topic on demand. Through a fusion of AI and human genius, we're pushing the boundaries of education and information dissemination. Our mission is to democratize knowledge, making every recent scientific achievement known and inspiring to all.
 
 ## :rocket: Features
 
 - **Boundless Exploration**: Venture into any subject with TED-like insights powered by Generative AI.
-- **Holistic Understanding**: Utilize a rich tapestry of resources including Wikipedia, Arxiv abstracts, and more for a well-rounded grasp of topics.
+- **Holistic Understanding**: Utilize a rich tapestry of resources, including Wikipedia, Arxiv abstracts, and more, for a well-rounded grasp of topics.
 - **Creative Generation**: Witness the blend of ChatGPT and Dall-E 3 in producing captivating content and visuals.
 - **Voice Synthesis**: Experience smooth, natural narrations courtesy of [ElevenLabs](https://elevenlabs.io) API.
 - **Multi-step API Calls**: Harness the power of [Wordware](https://wordware.ai) for efficient API orchestration.
 
 ## :bulb: Methodology
 
+### Technology
+
+Embark on a technological odyssey encompassing retrieval, embedding, story, and image generation:
+
+- **[USearch](https://github.com/unum-cloud/usearch)** is our go-to technology for efficiently and precisely retrieving relevant data from our expansive datasets.
+- **[UForm](https://github.com/unum-cloud/uform)** takes charge of image embeddings, making visual content more accessible and meaningful.
+- **[Wordware](https://wordware.ai)** facilitates multi-step API calls, streamlining the integration of different technologies into a cohesive workflow.
+- **ChatGPT** transforms raw data into engaging narratives, bringing topics to life.
+- **Dall-E 3** creates captivating visuals that resonate with the generated content.
+- **ElevenLabs API** gives a recognizable voice to our content, making the learning experience more immersive.
+
 ### Data
 
 Dive deep into the heart of extrapolaTED with a wide array of datasets that serve as the bedrock of our content generation:
 
-- **TED Dataset**: With over __1,000 transcripts__, this dataset provides a profound understanding of the topics already covered in TED talks, aiding in the exploration of new territories.
+- **TED Dataset**: With over __1,000 transcripts__, this dataset provides a profound understanding of the topics already covered in TED talks, aiding in exploring new territories.
 - **Arxiv Abstracts (`unum-cloud/ann-arxiv-2m`)**: A treasure trove of __2 million vectorized abstracts__ summarizing the latest strides in scientific research.
 - **WIT - Wikipedia Images Dataset**: A rich collection of well over __3 million images__ aiding in the visual representation of generated content.
-- **Wikipedia Abstracts (`wikipedia`)**: The __6 million abstracts__ in this dataset serve as a solid foundation for textual content, providing ground-truth retrieval of factual information.
-
-### Technology
-
-Embark on a technological odyssey encompassing retrieval, embedding, story and image generation:
-
-- **[USearch](https://github.com/unum-cloud/usearch)** is our go-to technology for efficient and precise retrieval of relevant data from our expansive datasets.
-- **[UForm](https://github.com/unum-cloud/uform)** takes charge of image embeddings, making visual content more accessible and meaningful.
-- **[Wordware](https://wordware.ai)** facilitates multi-step API calls, streamlining the integration of different technologies into a cohesive workflow.
-- **ChatGPT**: A cornerstone in our story generation pipeline, ChatGPT transforms raw data into engaging narratives, bringing topics to life.
-- **Dall-E 3**: When it comes to image generation, Dall-E 3 steps in to create captivating visuals that resonate with the generated content.
-- **ElevenLabs API**: Leveraged for voice synthesis, ElevenLabs breathes life into our content, making the learning experience more immersive.
+- **Wikipedia Abstracts (`wikipedia`)**: The __6 million abstracts__ in this dataset are a solid foundation for textual content, providing ground-truth retrieval of factual information.
 
 ## :hammer_and_wrench: Setup
 
@@ -71,10 +71,10 @@ Get started with extrapolaTED in a breeze:
      ```
 
 4. **Exploration**:
-   - Open your Jupyter Notebook and start generating TED-like lectures on your desired topics.
+   - Open your Jupyter Notebook and generate TED-like lectures on your desired topics.
    - Or simply open the [Wordware Prompt Pipeline](https://app.wordware.ai/r/25184ff7-db28-4c50-a0c4-2addbf31c28f) and start playing with it!
 
-Your journey towards creating insightful and illuminating TED-like lectures begins now!
+Your journey toward creating insightful and illuminating TED-like lectures begins now!
 
 ## :star2: The Minds Behind
 
