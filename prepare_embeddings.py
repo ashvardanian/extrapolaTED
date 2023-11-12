@@ -10,14 +10,15 @@ from transformers import AutoTokenizer, AutoModel
 from usearch.io import load_matrix, save_matrix
 
 # Check if CUDA is available and set the device accordingly
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+allow_gpu = False
+device = torch.device("cuda" if torch.cuda.is_available() and allow_gpu else "cpu")
 
 model_uform = get_model("unum-cloud/uform-vl-english").to(device)
 tokenizer_e5 = AutoTokenizer.from_pretrained("intfloat/e5-base-v2")
 model_e5 = AutoModel.from_pretrained("intfloat/e5-base-v2").to(device)
 
 # If multiple GPUs are available, wrap the model with DataParallel
-if torch.cuda.device_count() > 1:
+if allow_gpu and torch.cuda.device_count() > 1:
     print(f"Using {torch.cuda.device_count()} GPUs!")
     model_e5 = torch.nn.DataParallel(model_e5)
 
@@ -46,7 +47,7 @@ def vectorize_e5(input_texts: list) -> np.ndarray:
         return embeddings.detach().cpu().numpy().astype(np.float16)
 
 
-    if torch.cuda.device_count() > 1:
+    if allow_gpu and torch.cuda.device_count() > 1:
         with torch.cuda.amp.autocast():
             return infer()
     else:
