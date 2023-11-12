@@ -1,6 +1,8 @@
 import os
 import base64
 
+import networkx as nx
+import numpy as np
 from fastapi import FastAPI, HTTPException, Query
 import pandas as pd
 import numpy as np
@@ -17,11 +19,14 @@ arxiv_texts_df = pd.read_parquet("./data/ann-arxiv-2m/title_abstract.parquet")
 wiki_texts_index = Index.restore("./data/ann-wiki-6m/abstract.e5-base-v2.usearch")
 wiki_texts_df = pd.read_parquet("./data/ann-wiki-6m/title_abstract.parquet")
 
-wiki_images_index = Index.restore("./data/ann-wiki-images-3m/abstract.e5-base-v2.usearch")
+wiki_images_index = Index.restore(
+    "./data/ann-wiki-images-3m/abstract.e5-base-v2.usearch"
+)
 wiki_images_df = pd.read_parquet("./data/ann-wiki-images-3m/title_abstract.parquet")
 
 
 app = FastAPI()
+
 
 def try_one(query: str, top_k: int = 5):
     # Vectorize the query
@@ -36,7 +41,9 @@ def try_one(query: str, top_k: int = 5):
     arxiv_texts = arxiv_texts_df.loc[arxiv_texts_keys.flatten()]["abstract"].tolist()
     wiki_texts = wiki_texts_df.loc[wiki_texts_keys.flatten()]["abstract"].tolist()
     wiki_images_paths = wiki_images_df.loc[wiki_images_keys.flatten()]["path"].tolist()
-    wiki_images_captions = wiki_images_df.loc[wiki_images_keys.flatten()]["abstract"].tolist()
+    wiki_images_captions = wiki_images_df.loc[wiki_images_keys.flatten()][
+        "abstract"
+    ].tolist()
 
     wiki_images = []
     for path, caption in zip(wiki_images_paths, wiki_images_captions):
@@ -46,10 +53,12 @@ def try_one(query: str, top_k: int = 5):
             buffered = BytesIO()
             image.save(buffered, format="JPEG")
             img_str = base64.b64encode(buffered.getvalue()).decode()
-            wiki_images.append({
-                "text": caption,
-                "image": f"data:image/jpeg;base64,{img_str}",
-            })
+            wiki_images.append(
+                {
+                    "text": caption,
+                    "image": f"data:image/jpeg;base64,{img_str}",
+                }
+            )
         except Exception as e:
             print(f"Error image processing: ", e)
 
@@ -59,8 +68,14 @@ def try_one(query: str, top_k: int = 5):
         "images": wiki_images,
     }
 
-def cluster_texts(query: str, nclusters: int = 10, npoints: int = 1000, abstracts: bool = False):
 
+def cluster_texts(
+    query: str,
+    nclusters: int = 10,
+    npoints: int = 1000,
+    abstracts: bool = False,
+    grid_size: int = 100,
+):
     # Vectorize the query
     query_vector = vectorize_e5([query])
 
@@ -80,30 +95,67 @@ def cluster_texts(query: str, nclusters: int = 10, npoints: int = 1000, abstract
     centroids_titles = points_titles.iloc[centroids]
     centroids_abstracts = points_abstracts.iloc[centroids]
 
+    G = nx.Graph()
+    for i in arxiv_keys:
+        G.add_node(i)
+    for i, i_key in enumerate(centroids_keys):
+        for j, j_key in enumerate(centroids_keys):
+            d = cosine(centroids_vecs[i], centroids_vecs[j])
+            G.add_edge(i_key, j_key, weight=d)
+    for i, i_key in enumerate(arxiv_keys):
+        for j, j_key in enumerate(centroids_keys):
+            d = cosine(arxiv_vecs[i], centroids_vecs[j])
+            G.add_edge(i_key, j_key, weight=d)
+
+    # Function to compute force-based layout
+    def compute_force_layout(G, grid_size):
+        # Compute the spring layout
+        pos = nx.spring_layout(G, k=0.15, iterations=50)
+
+        # Scale positions to fit the grid
+        for node, coordinates in pos.items():
+            pos[node] = tuple(grid_size * np.array(coordinates))
+
+        return pos
+
+    # Compute force-based layout
+    pos = compute_force_layout(G, grid_size)
+    coordinates = {
+        node: {"x": position[0], "y": position[1]} for node, position in pos.items()
+    }
+
     result_centroids = []
     result_points = []
 
     for i, key in enumerate(centroids_keys):
-        result_centroids.append({
-            "key": int(key),
-            "title": str(centroids_titles.iloc[i]),
-            "abstract": str(centroids_abstracts.iloc[i]) if abstracts else "",
-            "distances": [
-                cosine(centroids_vecs[i], centroids_vecs[j])
-                for j in range(len(centroids))
-            ],
-        })
+        result_centroids.append(
+            {
+                "key": int(key),
+                "title": str(centroids_titles.iloc[i]),
+                "abstract": str(centroids_abstracts.iloc[i]) if abstracts else "",
+                "x": coordinates[key]["x"],
+                "y": coordinates[key]["y"],
+                "distances": [
+                    cosine(centroids_vecs[i], centroids_vecs[j])
+                    for j in range(len(centroids))
+                ],
+            }
+        )
 
     for i, key in enumerate(arxiv_keys):
-        result_points.append({
-            "key": int(key),
-            "title": str(points_titles.iloc[i]),
-            "abstract": str(points_abstracts.iloc[i]) if abstracts else "",
-            "distances": [
-                cosine(arxiv_vecs[i], centroids_vecs[j])
-                for j in range(len(centroids))                
-            ],
-        })
+        result_points.append(
+            {
+                "key": int(key),
+                "title": str(points_titles.iloc[i]),
+                "abstract": str(points_abstracts.iloc[i]) if abstracts else "",
+                "x": coordinates[key]["x"],
+                "y": coordinates[key]["y"],
+                "distances": [
+                    cosine(arxiv_vecs[i], centroids_vecs[j])
+                    for j in range(len(centroids))
+                ],
+            }
+        )
 
     return {
         "centroids": result_centroids,
@@ -119,10 +171,10 @@ async def search(query: str, top_k: int = 5):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-
 @app.get("/clusters/")
-async def search(query: str, nclusters: int = 5, npoints: int = 1000, abstracts: bool = False):
-    
+async def search(
+    query: str, nclusters: int = 5, npoints: int = 1000, abstracts: bool = False
+):
     try:
         return cluster_texts(query, nclusters, npoints, abstracts)
     except Exception as e:
@@ -131,7 +183,6 @@ async def search(query: str, nclusters: int = 5, npoints: int = 1000, abstracts:
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=33333)
     # print(cluster_texts("subgraph isomorphism"))
-
-    
